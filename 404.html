@@ -3,16 +3,19 @@
   <head>
     <meta charset="utf-8">
     <script>
-      const segmentCount = 1;
-      const location = window.location;
-      const repo = location.pathname.split('/')[1];
+      const segment = 1;
+      const path = window.location.pathname
+        .split('/')
+        .slice(segment + 1)
+        .join('/');
 
-      sessionStorage.redirect =
-        location.pathname + location.search + location.hash;
+      const redirect = '/' +
+        window.location.pathname.split('/')[segment] +
+        '/?/' + path +
+        window.location.search.replace('?', '&') +
+        window.location.hash;
 
-      location.replace(
-        location.origin + '/' + repo + '/'
-      );
+      window.location.replace(redirect);
     </script>
   </head>
   <body></body>
